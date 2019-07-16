@@ -5,9 +5,16 @@ import PropTypes from 'prop-types';
 class CourseForm extends React.Component {
   constructor(props) {
     super(props);
+    this.getAuthorName = this.getAuthorName.bind(this);
+  }
+
+  getAuthorName(authors,course){
+    let tempAuthor = authors.find(a => a.id === course.authorId);
+    return tempAuthor.name;
   }
   render(props) {
-    const { course, errors, authors, onChange, onSave } = { ...this.props };
+    const { course, errors,authors, onChange, onSave,saving} = { ...this.props };
+    
 
     return (
       <form className="form-group" onSubmit={onSave}>
@@ -17,8 +24,9 @@ class CourseForm extends React.Component {
             {errors.onSave}
           </div>
         )}
-        {/* <TextInput
+        <TextInput
               name="title"
+              type="text"
               label="Title"
               value={course.title}
               onChange={onChange}
@@ -38,25 +46,21 @@ class CourseForm extends React.Component {
               error={errors.author}
             />
       
-            <TextInput
+           <TextInput
               name="category"
               label="Category"
+              type="text"
               value={course.category}
               onChange={onChange}
               error={errors.category}
-            /> */}
-        <div className="form-group">Title : <input name={'title'} type='text' onChange={onChange}></input></div>
-        <div className="form-group">Author : <select className="form-control">
-          <option key='selected' selected='selected'>{"default"}</option>
-          {authors.map(author => {return (<option key={author.id} value={author.name}>{author.name}</option>)})}           
-        </select>
-        <div className='form-group'>
-          Category : <input name={'category'} type='text' onChange={onChange}></input>
-        </div>
-        </div>
+            /> 
+            
 
-        <button type="submit" disabled={this.props.saving} className="btn btn-primary">
-          {this.props.saving ? "Saving..." : "Save"}
+
+        
+
+        <button type="submit" disabled={saving} className="btn btn-primary">
+          {saving ? "Saving..." : "Save"}
         </button>
       </form>
     )

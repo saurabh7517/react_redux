@@ -47,7 +47,7 @@ class CoursePage extends React.Component{
         }
         return(
             <React.Fragment>
-                {this.state.redirectToAddCoursePage && <Redirect to="/course"/>}
+                {this.state.redirectToAddCoursePage === true ? <Redirect to="/course"/> : null}
                 <h2>Courses</h2>
                 <button onClick = {(event) => this.handleClick() } className='btn btn-primary add-course' >Add Course</button>
                 <CourseList courses={newList}/>

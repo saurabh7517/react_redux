@@ -21,10 +21,12 @@ class ManageCoursePage extends React.Component {
     handleChange(event) {
         //do nothing for now....
         const { name, value } = event.target;
-        // event.preventDefault();
+        
 
         let tempCourse = { ...this.state.course, [name]: name === "authorId" ? parseInt(value, 10) : value };
-        this.setState({ course: tempCourse });
+        
+        this.setState({course:tempCourse});
+        event.preventDefault();
 
 
     }
@@ -52,7 +54,7 @@ class ManageCoursePage extends React.Component {
     render(props) {
 
         return (
-            <CourseForm course={this.props.course} errors={this.state.errors} authors={this.props.authorList} onChange={this.handleChange} onSave={this.handleSave} />
+            <CourseForm course={this.state.course} errors={this.state.errors} authors={this.props.authorList} onChange={this.handleChange} onSave={this.handleSave} saving={false} />
         );
     }
 }
